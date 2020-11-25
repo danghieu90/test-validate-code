@@ -20,7 +20,20 @@ pipeline {
                 description:'describing choices', name:'nameChoice', choices: "QA\nUAT\nProduction\nDevelop\nMaster"]
              ])
 
-            println(userInput); //Use this value to branch to different logic if needed
+            if( "${userInput}" == "Master"){
+                stage('master') {
+                  steps {
+                    sh 'echo master'
+                  }
+                }
+              stage('develop') {
+                  steps {
+                    sh 'echo develop'
+                  }
+                }
+            } else {
+                //do something else
+            }
         }
       }
     }
