@@ -15,19 +15,26 @@ pipeline {
     stage('test') {
       steps {
         script {
-             def userInput = input(message: 'Success or error ?',
-             parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'strDef', 
-                description:'describing choices', name:'nameChoice', choices: "Success\nError"]
-             ])
+          def userInput = input(message: 'Success or error ?',
+          parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'strDef',
+          description:'describing choices', name:'nameChoice', choices: "Success\nError"]
+        ])
 
-            if( "${userInput}" == "Success"){
-                currentBuild.result = 'SUCCESS'
-            } else {
-                currentBuild.result = 'FAILURE'
-            }
+        if( "${userInput}" == "Success"){
+          currentBuild.result = 'SUCCESS'
+        } else {
+          currentBuild.result = 'FAILURE'
         }
       }
-    }
 
+    }
   }
+
+  stage('finish') {
+    steps {
+      cleanWs(cleanWhenSuccess: true, cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanupMatrixParent: true, deleteDirs: true, disableDeferredWipeout: true)
+    }
+  }
+
+}
 }
