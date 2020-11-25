@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'php:7.3-cli-alpine'
+      image 'codecheck:latest'
     }
 
   }
