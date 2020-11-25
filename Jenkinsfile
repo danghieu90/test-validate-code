@@ -1,25 +1,14 @@
 pipeline {
   agent {
     docker {
-      image 'hieudangz/php-fpm:7.4'
+      image 'php:7.3-cli-alpine'
     }
 
   }
   stages {
     stage('init') {
-      parallel {
-        stage('init') {
-          steps {
-            sh 'whoami'
-          }
-        }
-
-        stage('init 2') {
-          steps {
-            sh 'pwd'
-          }
-        }
-
+      steps {
+        sh 'pwd && whoami && id -u && id -g'
       }
     }
 
