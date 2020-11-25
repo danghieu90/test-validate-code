@@ -15,24 +15,15 @@ pipeline {
     stage('test') {
       steps {
         script {
-             def userInput = input(message: 'Merge to?',
+             def userInput = input(message: 'Success or error ?',
              parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'strDef', 
-                description:'describing choices', name:'nameChoice', choices: "QA\nUAT\nProduction\nDevelop\nMaster"]
+                description:'describing choices', name:'nameChoice', choices: "Success\nError"]
              ])
 
-            if( "${userInput}" == "Master"){
-                stage('master') {
-                  steps {
-                    sh 'echo master'
-                  }
-                }
-              stage('develop') {
-                  steps {
-                    sh 'echo develop'
-                  }
-                }
+            if( "${userInput}" == "Success"){
+                currentBuild.result = 'SUCCESS'
             } else {
-                //do something else
+                currentBuild.result = 'FAILURE'
             }
         }
       }
