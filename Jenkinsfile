@@ -7,8 +7,19 @@ pipeline {
   }
   stages {
     stage('init') {
-      steps {
-        sh 'pwd && whoami && id -u && id -g'
+      parallel {
+        stage('init') {
+          steps {
+            sh 'pwd && whoami && id -u && id -g'
+          }
+        }
+
+        stage('init 2') {
+          steps {
+            sh 'ls -al'
+          }
+        }
+
       }
     }
 
