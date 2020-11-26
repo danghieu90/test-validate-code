@@ -14,7 +14,7 @@ pipeline {
 
     stage('test') {
       steps {
-        sh 'echo ${env.BUILD_URL}'
+        echo "build URL is ${env.BUILD_URL}"
         script {
           def userInput = input(message: 'Success or error ?',
           parameters: [[$class: 'ChoiceParameterDefinition',
