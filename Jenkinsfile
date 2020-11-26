@@ -15,6 +15,7 @@ pipeline {
     stage('test') {
       steps {
         echo "build URL is ${env.BUILD_URL}"
+        echo "blueocean build URL is ${env.RUN_DISPLAY_URL}"
         script {
           def userInput = input(message: 'Success or error ?',
           parameters: [[$class: 'ChoiceParameterDefinition',
