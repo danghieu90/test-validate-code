@@ -14,9 +14,10 @@ pipeline {
 
     stage('test') {
       steps {
+        sh 'println env.BUILD_URL'
         script {
           def userInput = input(message: 'Success or error ?',
-          parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'strDef',
+          parameters: [[$class: 'ChoiceParameterDefinition',
           description:'describing choices', name:'nameChoice', choices: "Success\nError"]
         ])
 
